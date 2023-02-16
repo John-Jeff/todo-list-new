@@ -4,7 +4,15 @@ import org.todolist.utility.DateAndTime;
 
 public class TodoList {
 
-    ProjectList projectList = new ProjectList();
+    ProjectList pl = new ProjectList();
     DateAndTime dateTime = new DateAndTime();
+
+    public void createNewProject(String newProjectTitle) {
+        pl.addProject(new Project(newProjectTitle));
+    }
+
+    public ProjectList getPL() {
+        return pl;
+    }
 
 }

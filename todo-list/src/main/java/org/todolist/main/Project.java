@@ -12,4 +12,11 @@ public class Project {
         this.title = title;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public List<TodoItem> getTodoItemList() {
+        return todoItemList;
+    }
 }

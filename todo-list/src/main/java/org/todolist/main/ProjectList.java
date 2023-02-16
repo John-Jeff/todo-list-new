@@ -8,4 +8,14 @@ public class ProjectList {
 
     Map<String, List<TodoItem>> projectList = new HashMap<>();
 
+    public Map<String, List<TodoItem>> getProjectList() {
+        return projectList;
+    }
+
+    public void addProject(Project newProject) {
+
+        projectList.put(newProject.getTitle(), newProject.getTodoItemList());
+
+    }
+
 }
