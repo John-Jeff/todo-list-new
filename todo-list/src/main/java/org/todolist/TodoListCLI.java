@@ -10,13 +10,16 @@ public class TodoListCLI {
     private final String MAIN_MENU_CREATE_PROJECT = "Create project";
     private final String MAIN_MENU_EXIT = "Exit";
 
+    private final String[] MAIN_MENU_OPTIONS = {MAIN_MENU_LIST_PROJECTS, MAIN_MENU_CREATE_PROJECT, MAIN_MENU_EXIT};
+
     Scanner userInput = new Scanner(System.in);
     TodoList tl = new TodoList();
 
+    private boolean isRunning = true;
+
+
     // Main function to run program
     public void run() {
-
-        boolean isRunning = true;
 
         System.out.println("**************************");
         System.out.println(" Welcome to the todo list ");
@@ -26,35 +29,14 @@ public class TodoListCLI {
 
             // Run initially when program runs and project list is empty
             if (tl.getPL().getProjectList().isEmpty()) {
-                System.out.print("It looks like you don't have any projects!\n" +
-                        "Enter [N] to create one now\n" +
-                        "Or enter [Q] to exit: ");
-
-                String newInput = userInput.nextLine().toUpperCase();
-
-                // Verify user input based on options
-                while (!newInput.matches("N|Q")) {
-                    System.out.print("\nNot a valid option, please try again: ");
-                    newInput = userInput.nextLine().toUpperCase();
-                }
-
-                switch (newInput) {
-                    case "N":
-                        // Prompt user for project creation
-                        newProjectPrompt();
-                        isRunning = false;
-                        break;
-
-                    case "Q":
-                        // Exit program
-                        System.out.println("Goodbye...");
-                        isRunning = false;
-                        break;
-                }
+                emptyProjectListPrompt();
 
             }
             else {
                 displayMainMenu();
+                System.out.print("--> ");
+                String mainInput = userInput.nextLine();
+
             }
 
         }
@@ -63,8 +45,43 @@ public class TodoListCLI {
 
     public void displayMainMenu() {
 
-        System.out.println("What would you like to do? ");
+        System.out.println("Please make a selection");
+        System.out.println("**************************");
 
+        for (int i = 0; i < MAIN_MENU_OPTIONS.length; i++) {
+            System.out.printf("[%d]: %s%n", (i + 1), MAIN_MENU_OPTIONS[i]);
+        }
+
+    }
+
+    public void emptyProjectListPrompt() {
+
+        System.out.print("It looks like you don't have any projects!\n" +
+                "Enter [N] to create one now\n" +
+                "Or enter [Q] to exit\n" +
+                "--> ");
+
+        String newInput = userInput.nextLine().toUpperCase();
+
+        // Verify user input based on options
+        while (!newInput.matches("N|Q")) {
+            System.out.print("\nNot a valid option, please try again: ");
+            newInput = userInput.nextLine().toUpperCase();
+        }
+
+        switch (newInput) {
+            case "N":
+                // Prompt user for project creation
+                newProjectPrompt();
+                isRunning = false;
+                break;
+
+            case "Q":
+                // Exit program
+                System.out.println("Goodbye...");
+                isRunning = false;
+                break;
+        }
 
     }
 
